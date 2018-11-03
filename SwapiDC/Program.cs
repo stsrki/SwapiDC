@@ -33,7 +33,9 @@ namespace SwapiDC
 
                 var runner = container.GetInstance<Runner>();
 
-                await runner.Run( distance );
+                await runner.Init();
+
+                runner.Run( distance );
 
                 Console.WriteLine( "Press any key to continue..." );
                 Console.ReadKey();

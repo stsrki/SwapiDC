@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SwapiDC.Models;
 using SwapiDC.Services;
 #endregion
 
@@ -18,6 +19,8 @@ namespace SwapiDC
         private readonly ICalculator calculator;
 
         private readonly IStarshipService starshipService;
+
+        private List<Starship> starships;
 
         #endregion
 
@@ -34,12 +37,15 @@ namespace SwapiDC
 
         #region Methods
 
-        public async Task Run( long distance )
+        public async Task Init()
         {
             logger.Info( "Getting all available starships." );
 
-            var starships = await starshipService.GetAll();
+            starships = await starshipService.GetAll();
+        }
 
+        public void Run( long distance )
+        {
             if ( starships == null )
                 throw new ArgumentNullException( nameof( starships ) );
 

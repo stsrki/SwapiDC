@@ -34,7 +34,9 @@ namespace SwapiDC.Tests
 
             var runner = new Runner( logger, calculator, starshipService );
 
-            await runner.Run( 1000000 );
+            await runner.Init();
+
+            runner.Run( 1000000 );
 
             logger.Received().Info( "Millennium Falcon needs to stop: ", Arg.Any<object>() );
         }
@@ -49,7 +51,9 @@ namespace SwapiDC.Tests
 
             var runner = new Runner( logger, calculator, starshipService );
 
-            await runner.Run( 1000000 );
+            await runner.Init();
+
+            runner.Run( 1000000 );
 
             logger.Received().Error( "Unknown speed for: Millennium Falcon" );
         }
@@ -71,7 +75,9 @@ namespace SwapiDC.Tests
 
             var runner = new Runner( logger, calculator, starshipService );
 
-            await runner.Run( distance );
+            await runner.Init();
+
+            runner.Run( distance );
 
             long expected = 9;
 
@@ -94,7 +100,9 @@ namespace SwapiDC.Tests
 
             var runner = new Runner( logger, calculator, starshipService );
 
-            await runner.Run( distance );
+            await runner.Init();
+
+            runner.Run( distance );
 
             long expected = 9;
 
@@ -106,6 +114,8 @@ namespace SwapiDC.Tests
         {
             using ( AsyncScopedLifestyle.BeginScope( container ) )
             {
+                var distance = 1000000;
+
                 // mock only the logger
                 var logger = Substitute.For<ILogger>();
 
@@ -115,7 +125,9 @@ namespace SwapiDC.Tests
 
                 var runner = new Runner( logger, calculator, starshipService );
 
-                await runner.Run( 1000000 );
+                await runner.Init();
+
+                runner.Run( distance );
 
                 logger.Received( 1 ).Info( Arg.Any<string>() );
                 logger.Received( 1 ).Success( Arg.Any<string>() );
