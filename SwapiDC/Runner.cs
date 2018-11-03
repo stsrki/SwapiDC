@@ -70,5 +70,11 @@ namespace SwapiDC
         }
 
         #endregion
+
+        #region Properties
+
+        public bool Initialised { get { return starships?.Count > 0; } }
+
+        #endregion
     }
 }

@@ -20,7 +20,8 @@ namespace SwapiDC
             {
                 Bootstrap();
 
-                long distance = 0;
+                var runner = container.GetInstance<Runner>();
+
                 string input = string.Empty;
 
                 do
@@ -28,17 +29,17 @@ namespace SwapiDC
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write( "Enter distance: " );
                     Console.ForegroundColor = ConsoleColor.White;
+
                     input = Console.ReadLine();
-                } while ( !long.TryParse( input, out distance ) );
 
-                var runner = container.GetInstance<Runner>();
+                    if ( long.TryParse( input, out var distance ) )
+                    {
+                        if ( !runner.Initialised )
+                            await runner.Init();
 
-                await runner.Init();
-
-                runner.Run( distance );
-
-                Console.WriteLine( "Press any key to continue..." );
-                Console.ReadKey();
+                        runner.Run( distance );
+                    }
+                } while ( input != "exit" );
             }
             catch ( Exception exc )
             {
