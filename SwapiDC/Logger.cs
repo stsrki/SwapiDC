@@ -18,7 +18,7 @@ namespace SwapiDC
 
             foreach ( var result in results )
             {
-                Write( result, Color.Success );
+                Write( result, Color.Info );
             }
 
             Console.Write( Environment.NewLine );
@@ -54,11 +54,11 @@ namespace SwapiDC
             switch ( color )
             {
                 case Color.Success:
-                    return ConsoleColor.Green;
+                    return ConsoleColor.Cyan;
                 case Color.Error:
                     return ConsoleColor.Red;
                 case Color.Info:
-                    return ConsoleColor.Blue;
+                    return ConsoleColor.Green;
                 default:
                     return ConsoleColor.White;
             }
