@@ -42,14 +42,14 @@ namespace SwapiDC
             logger.Info( "Getting all available starships." );
 
             starships = await starshipService.GetAll();
+
+            logger.Success( $"Found {starships.Count} starships." );
         }
 
         public void Run( long distance )
         {
             if ( starships == null )
                 throw new ArgumentNullException( nameof( starships ) );
-
-            logger.Success( $"Found {starships.Count} starships." );
 
             foreach ( var starship in starships )
             {
